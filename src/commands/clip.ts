@@ -28,9 +28,16 @@ module.exports = {
         await interaction.deferReply();
         await interaction.editReply(`🔃Creating clip of ${content} in the ${category} category...`);
 
-        try {
-            const ms = (time.getMilliseconds() - new Date().getMilliseconds());
-            await interaction.editReply(`✅Created clip of ${content} in the ${category} successfully`);
+		try {
+			const post = await prisma.clip.create({
+				data: {
+					id: interaction.user.id,
+					category: category,
+					content: content
+				}
+			})
+
+            await interaction.editReply(`✅Created clip of ${content} in the ${category} successfully\n${post.category}:${post.content}`);
         } catch (error: any) {
             await interaction.editReply('PingCommand is unavailable.');
             throw new Error(error.message);
