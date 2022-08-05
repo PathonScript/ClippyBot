@@ -36,9 +36,9 @@ module.exports = {
 				}
 			})
 
-            await interaction.editReply(`✅**Created clip of ${content} in the ${category} successfully**\n${post.category}: ${post.content}`);
+			await interaction.editReply(`✅**Created clip of ${content} in the ${category} category successfully**` + "\n`" + category + "`" + ": " + "`" + content + "`");
         } catch (error: any) {
-            await interaction.editReply('PingCommand is unavailable.');
+            await interaction.editReply('❗PingCommand is unavailable.');
             throw new Error(error.message);
         }
     },
