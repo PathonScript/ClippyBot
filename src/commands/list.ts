@@ -7,7 +7,6 @@ module.exports = {
 		.setDescription("List all of your clips.")
 	,
 	async execute(interaction: any) { 
-		console.log("Command Used")
 		await interaction.deferReply();
 		await interaction.editReply(`**Finding your clips...**`);
 		try {
@@ -18,13 +17,11 @@ module.exports = {
 				}
 			})
 			let replyText: string = "";
-			findUser.forEach(user => replyText += `${user.content}\n`)
+			findUser.forEach(user => replyText += "`" + user.category + "`" + ": " + "`" + user.content + "`\n")
 			await interaction.editReply(replyText);
-			console.log("Log 1")
 		} catch (error:any) {
 			await interaction.editReply('❗ListCommand is unavailable.');
             throw new Error(error.message);
-			console.log("Log 2")
 		}
 
 	}

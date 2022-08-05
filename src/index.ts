@@ -21,8 +21,8 @@ for (const file of commandFiles) {
 for (const file of eventFiles) {
     const event = require(`./events/${file.substring(0, file.length - 3)}`);
 
-    if (event.once) {
-        client.once(event.name, (...args) => event.execute(...args, client));
+    if (event.on) {
+        client.on(event.name, (...args) => event.execute(...args, client));
         continue;
     }
 
