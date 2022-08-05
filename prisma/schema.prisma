@@ -6,12 +6,13 @@ generator client {
 }
 
 datasource db {
-  provider = "mongodb"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
 model Clip {
-  id       String @id @map("_id")
+  id       Int    @id @default(autoincrement())
+  uid      String
   category String
   content  String
 }
