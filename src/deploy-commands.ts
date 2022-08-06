@@ -1,17 +1,14 @@
 import dotenv from 'dotenv'
 import { REST } from "@discordjs/rest";
 import { Routes } from "discord-api-types/v9";
-import { commandFiles } from "./files";
+import { exportCommandsPaths } from "./files";
 import { BotCommand } from "./types";
 dotenv.config();
 
 const commands: object[] = [];
 
-for (const file of commandFiles) {
-    const command = require(`./commands/${file.substring(
-        0,
-        file.length - 3
-    )}`) as BotCommand;
+for (const path of exportCommandsPaths) {
+    const command = require(path.substring(0, path.length - 3)) as BotCommand;
     commands.push(command.data.toJSON());
 }
 

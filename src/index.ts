@@ -3,7 +3,7 @@ import "./deploy-commands";
 
 import { Client, Collection, IntentsBitField } from "discord.js";
 import { BotClient, BotCommand } from "./types";
-import { commandFiles, eventFiles } from "./files";
+import { exportCommandsPaths, eventFiles } from "./files";
 
 const client = new Client({
 	intents: [
@@ -12,12 +12,12 @@ const client = new Client({
 	],
 }) as BotClient;
 client.commands = new Collection();
-
-for (const file of commandFiles) {
-    const command = require(`./commands/${file}`) as BotCommand;
-    client.commands.set(command.data.name, command);
+//Searching for commands in the command folder
+for (const path of exportCommandsPaths) {
+     const command = require(path) as BotCommand;
+     client.commands.set(command.data.name, command);
 }
-
+//
 for (const file of eventFiles) {
     const event = require(`./events/${file.substring(0, file.length - 3)}`);
 
