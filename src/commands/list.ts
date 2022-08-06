@@ -11,7 +11,6 @@ module.exports = {
 		await interaction.editReply(`**Finding your clips...**`);
 		try {
 			const findUser = await prisma.clip.findMany({
-				
 				where: {
 					uid: interaction.user.id
 				}
